@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 예외처리 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<!-- Default error.jsp -->
+		<property name="defaultErrorView" value="common/error"></property>
+		<!-- 특정예외 -->
+		<property name="exceptionMappings">
+			<props>
+				<prop key="java.lang.IllegalArgumentException">
+					common/IllegalArgumentError
+				</prop>
+				
+				<prop key="java.lang.arithmeticException">
+					common/arithmeticError
+				</prop>				
+			</props>
+		</property>
+	</bean>
+	<!-- File Upload설정 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"/>
+		<!-- 용량: 50*1024*1024: 50M / 기본값 : -1(무한대)-->
+		<property name="maxUploadSize" 	 value="52428800"/>
+		<property name="maxInMemorySize" value="52428800"/>
+	
+	</bean>
+</beans>
